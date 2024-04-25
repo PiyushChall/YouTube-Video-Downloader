@@ -10,7 +10,7 @@ def start_download():
         youtube_object = YouTube(youtube_link, on_progress_callback=on_progress)
         video_title = youtube_object.title
         video = youtube_object.streams.get_highest_resolution()
-        title.configure(text=video_title, text_color="white")
+        title.configure(text=video_title, text_color="green")
         finish_download.configure(text="")
         video.download()
         finish_download.configure(text="Downloaded", text_color="green")
@@ -35,7 +35,7 @@ app = customtkinter.CTk()
 app.geometry("720x480")
 app.title("YouTube Video Downloader")
 
-title = customtkinter.CTkLabel(app, text=" Just Insert that link here ")
+title = customtkinter.CTkLabel(app, text=" Just Insert that link here ", text_color="green")
 title.pack(padx=10, pady=10)
 
 # Url Insertion
