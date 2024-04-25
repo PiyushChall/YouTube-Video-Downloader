@@ -4,13 +4,13 @@ import customtkinter
 from pytube import YouTube
 
 
-def start_download():
+def video_download():
     try:
         youtube_link = link.get()
         youtube_object = YouTube(youtube_link, on_progress_callback=on_progress)
         video_title = youtube_object.title
         video = youtube_object.streams.get_highest_resolution()
-        title.configure(text=video_title, text_color="green")
+        title.configure(text=video_title, text_color="#1B4242")
         finish_download.configure(text="")
         video.download()
         finish_download.configure(text="Downloaded", text_color="green")
@@ -31,16 +31,17 @@ def on_progress(stream, chunk, bytes_remaining):
 # Appearance
 customtkinter.set_appearance_mode("System")
 customtkinter.set_default_color_theme("green")
-app = customtkinter.CTk()
+app = tkinter.Tk()
 app.geometry("720x480")
 app.title("YouTube Video Downloader")
+app.configure(bg="#8daea1")
 
-title = customtkinter.CTkLabel(app, text=" Just Insert that link here ", text_color="green")
+title = customtkinter.CTkLabel(app, text=" Insert the video link here ", text_color="#1B4242")
 title.pack(padx=10, pady=10)
 
 # Url Insertion
 url = tkinter.StringVar()
-link = customtkinter.CTkEntry(app, width=350, height=50, textvariable=url)
+link = customtkinter.CTkEntry(app, width=350, height=50, textvariable=url,fg_color="#EEE7DA")
 link.pack()
 
 # Download Completion
@@ -52,12 +53,12 @@ progress_percentage = customtkinter.CTkLabel(app, text="")
 progress_percentage.pack()
 
 # Progress Bar
-progress_bar = customtkinter.CTkProgressBar(app, width=400)
+progress_bar = customtkinter.CTkProgressBar(app, width=400, progress_color="#1B4242")
 progress_bar.set(0)
 progress_bar.pack(padx=10, pady=10)
 
 # Download Button
-download = customtkinter.CTkButton(app, text="<Download>", command=start_download)
+download = customtkinter.CTkButton(app, text=" Download ", command=video_download, fg_color="#092635", hover_color="#1B4242")
 download.pack(padx=10, pady=10)
 
 # MainLoop of the app
